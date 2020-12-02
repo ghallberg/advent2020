@@ -1,5 +1,5 @@
 import re
-CHECKER = re.compile("(\d+)-(\d+) (\w+): (\w.*)")
+CHECKER = re.compile(r"(\d+)-(\d+) (\w+): (\w.*)")
 
 def tokenize(line):
     tokens =  CHECKER.match(line)
