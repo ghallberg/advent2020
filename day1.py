@@ -10,7 +10,7 @@ def get_match(nums, group_size):
     return next(reduce(mul, group) for group in groups if is_match(group))
 
 
-with open('input1.txt') as input:
+with open('input/input1.txt') as input:
    nums = [int(line) for line in input]
 
    result1 = get_match(nums, 2)
