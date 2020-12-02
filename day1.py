@@ -2,13 +2,13 @@ from itertools import combinations
 from functools import reduce
 from operator import mul
 
-input_l = [1721, 979, 366, 299, 675, 1456]¬
-
 def is_match(num_group):
     return sum(num_group) == 2020
+
 def get_match(nums, group_size):
     groups = combinations(nums, group_size)
     return next(reduce(mul, group) for group in groups if is_match(group))
+
 
 with open('input1.txt') as input:
    nums = [int(line) for line in input]

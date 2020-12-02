@@ -26,6 +26,7 @@ def solve(input):
     print(f"Answer 1: {count_valid(tokenized_input, is_valid)}")
     print(f"Answer 2: {count_valid(tokenized_input, is_valid2)}")
 
+
 with open("input/input2.txt") as input:
     solve(input)
 
