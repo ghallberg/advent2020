@@ -15,13 +15,16 @@ def is_valid(min_count, max_count, char, password):
     return min_count <= char_count <= max_count
 
 def is_valid2(pos1, pos2, char, password):
-    return (password[pos1-1] == char) ^ (password[pos2-1] == char)
+    return (password[pos1-1] == char) != (password[pos2-1] == char)
 
+def count_valid(candidates, validator):
+    valid_candidates = [line for line in candidates if validator(*line)]
+    return len(valid_candidates)
 
 def solve(input):
     tokenized_input = [tokenize(line) for line in input]
-    print(f"Answer 1: {len([line for line in tokenized_input if is_valid(*line)])}")
-    print(f"Answer 2: {len([line for line in tokenized_input if is_valid2(*line)])}")
+    print(f"Answer 1: {count_valid(tokenized_input, is_valid)}")
+    print(f"Answer 2: {count_valid(tokenized_input, is_valid2)}")
 
 with open("input/input2.txt") as input:
     solve(input)
