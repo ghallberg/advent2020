@@ -2,8 +2,8 @@ from itertools import cycle, count, islice
 from functools import reduce
 from operator import mul
 
-path_steps = [(3,1),
-              (1,1),
+path_steps = [(1,1),
+              (3,1),
               (5,1),
               (7,1),
               (1,2)]
@@ -17,9 +17,9 @@ def count_trees(path):
     return list(path).count('#')
 
 def solve(input):
-    tree_counts = [count_trees(path_generator(input, y, x)) for y,x in path_steps]
-    print(f"Answer 1: {tree_counts[0]}")
-    print(f"Answer 2: {reduce(mul, tree_counts)}")
+    tree_counts = {(y,x):count_trees(path_generator(input, y, x)) for y,x in path_steps }
+    print(f"Answer 1: {tree_counts[(3,1)]}")
+    print(f"Answer 2: {reduce(mul, tree_counts.values())}")
 
 
 
