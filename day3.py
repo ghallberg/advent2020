@@ -10,10 +10,8 @@ path_steps = [(3,1),
 
 def path_generator(input, x_step, y_step):
     slope = [cycle(line) for line in input]
-
-    for y,x,i in zip(range(y_step, len(slope), y_step), count(start=x_step, step=x_step), count(1)):
-        x_content = slope[y]
-        yield next(islice(x_content, i*x_step, None))
+    for row,x in zip(slope[y_step::y_step], count(start=x_step, step=x_step)):
+        yield next(islice(row, x, None))
 
 def count_trees(path):
     return list(path).count('#')
