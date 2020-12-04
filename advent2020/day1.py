@@ -20,6 +20,8 @@ def solve(input):
 
     print(f"Answer1: {result1}, Answer2: {result2}")
 
+    return "bajs"
+
 
 if __name__ == "__main__":
     with open("../input/input1.txt") as input:
