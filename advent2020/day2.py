@@ -13,12 +13,12 @@ def tokenize(line):
     return (pos1, pos2, char, password)
 
 
-def is_valid(min_count, max_count, char, password):
+def valid_sled(min_count, max_count, char, password):
     char_count = password.count(char)
     return min_count <= char_count <= max_count
 
 
-def is_valid2(pos1, pos2, char, password):
+def valid_tobogan(pos1, pos2, char, password):
     return (password[pos1 - 1] == char) != (password[pos2 - 1] == char)
 
 
@@ -29,8 +29,10 @@ def count_valid(candidates, validator):
 
 def solve(input):
     tokenized_input = [tokenize(line) for line in input]
-    print(f"Answer 1: {count_valid(tokenized_input, is_valid)}")
-    print(f"Answer 2: {count_valid(tokenized_input, is_valid2)}")
+    res1 = count_valid(tokenized_input, valid_sled)
+    res2 = count_valid(tokenized_input, valid_tobogan)
+
+    return (res1, res2)
 
 
 if __name__ == "__main__":

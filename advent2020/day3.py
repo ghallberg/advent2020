@@ -16,12 +16,10 @@ def count_trees(path):
 
 
 def solve(input):
-    parsed_input = [line.rstrip() for line in input]
     tree_counts = {
-        (y, x): count_trees(path_generator(parsed_input, y, x)) for y, x in path_steps
+        (y, x): count_trees(path_generator(input, y, x)) for y, x in path_steps
     }
-    print(f"Answer 1: {tree_counts[(3,1)]}")
-    print(f"Answer 2: {reduce(mul, tree_counts.values())}")
+    return (tree_counts[(3, 1)], reduce(mul, tree_counts.values()))
 
 
 if __name__ == "__main__":

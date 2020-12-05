@@ -10,4 +10,4 @@ if __name__ == "__main__":
     solver = getattr(advent2020, f"solve_day{day_no}")
 
     with open(f"input/input{day_no}.txt") as input:
-        print(f"Answer: {solver(input)}")
+        print(f"Answer: {solver([s.rstrip() for s in input])}")

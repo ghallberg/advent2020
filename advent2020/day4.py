@@ -63,8 +63,7 @@ def passport_generator(lines):
 
 
 def solve(input):
-    parsed_input = [line.rstrip() for line in input]
-    gen = passport_generator(parsed_input)
+    gen = passport_generator(input)
     valid_key_passports = [passport for passport in gen if has_valid_keys(passport)]
     valid_value_passports = [
         passport for passport in valid_key_passports if has_valid_values(passport)

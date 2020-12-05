@@ -18,9 +18,7 @@ def solve(input):
     result1 = get_match(nums, 2)
     result2 = get_match(nums, 3)
 
-    print(f"Answer1: {result1}, Answer2: {result2}")
-
-    return "bajs"
+    return (result1, result2)
 
 
 if __name__ == "__main__":
