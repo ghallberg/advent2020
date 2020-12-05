@@ -1,36 +1,29 @@
 from itertools import takewhile, islice, chain
 import re
 
-REQUIRED_KEYS = {"byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"}
-
-def str_range(start, stop):
-    return [str(num) for num in range(start, stop)]
-
-ALLOWED_VALS = {
-    "byr": str_range(1920, 2003),
-    "iyr": str_range(2010, 2021),
-    "eyr": str_range(2020, 2031),
-    "ecl": ("amb", "blu", "brn", "gry", "grn", "hzl", "oth"),
-    "cm": str_range(150, 194),
-    "in": str_range(59, 77),
-}
-PATTERNS = {
-    "hgt": re.compile(r"(\d+)([a-z]+)"),
-    "hcl": re.compile(r"#[a-f0-9]{6}"),
-    "pid": re.compile(r"\d{9}"),
-}
-
-
-def has_valid_values(passport):
-    return all([validate_value(k, v) for k, v in passport.items()])
-
 
 def is_allowed(key, value):
-    return value in ALLOWED_VALS[key]
+    def str_range(start, stop):
+        return [str(num) for num in range(start, stop)]
+
+    allowed_vals = {
+        "byr": str_range(1920, 2003),
+        "iyr": str_range(2010, 2021),
+        "eyr": str_range(2020, 2031),
+        "ecl": ("amb", "blu", "brn", "gry", "grn", "hzl", "oth"),
+        "cm": str_range(150, 194),
+        "in": str_range(59, 77),
+    }
+    return value in allowed_vals[key]
 
 
 def valid_pattern_match(key, value):
-    return PATTERNS[key].match(value)
+    patterns = {
+        "hgt": re.compile(r"(\d+)([a-z]+)"),
+        "hcl": re.compile(r"#[a-f0-9]{6}"),
+        "pid": re.compile(r"\d{9}"),
+    }
+    return patterns[key].match(value)
 
 
 def validate_value(key, value):
@@ -45,17 +38,18 @@ def validate_value(key, value):
         return True
 
 
-def flatten(list_of_lists):
-    return chain(*list_of_lists)
+def has_valid_values(passport):
+    return all([validate_value(k, v) for k, v in passport.items()])
 
 
 def has_valid_keys(passport):
+    required_keys = {"byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"}
     passport_keys = set(passport.keys())
-    return passport_keys.issuperset(REQUIRED_KEYS)
+    return passport_keys.issuperset(required_keys)
 
 
 def make_passport(data):
-    pair_strings = flatten([line.split() for line in data])
+    pair_strings = chain(*[line.split() for line in data])
     pairs = [pair.split(":") for pair in pair_strings]
 
     return dict(pairs)
