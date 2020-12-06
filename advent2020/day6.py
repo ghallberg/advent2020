@@ -1,8 +1,6 @@
 from itertools import takewhile, islice
 import string
 
-test_data = ["abc", "", "a", "b", "c", "", "ab", "ac", "", "a", "a", "a", "a", "", "b"]
-
 
 def make_group(data):
     return {"members": data, "answers": set("".join(data))}
@@ -15,7 +13,16 @@ def group_generator(lines):
         yield make_group(group_data)
 
 
+def num_all_answers(group):
+    return [
+        answer
+        for answer in group["answers"]
+        if all([answer in member for member in group["members"]])
+    ]
+
+
 def solve(input):
-    groups = group_generator(input)
+    groups = list(group_generator(input))
     sum_answers = sum([len(group["answers"]) for group in groups])
-    return (sum_answers, None)
+    sum_all_answers = sum([len(num_all_answers(group)) for group in groups])
+    return (sum_answers, sum_all_answers)

@@ -82,4 +82,4 @@ def test_solve():
         "iyr:2011 ecl:brn hgt:59in",
     ]
 
-    assert solve(input) == 2
+    assert solve(input) == (2, 2)
