@@ -5,6 +5,7 @@ from itertools import chain
 CONTAINER_PATTERN = re.compile(r"([\w\s]+?) bags contain (.+?)\.$")
 CONTENT_PATTERN = re.compile(r"(\d) (.+?) bag(?:s|)")
 
+
 def content_gen(contents):
     for content in [CONTENT_PATTERN.match(s.strip()) for s in contents.split(",")]:
         if not content:
@@ -32,18 +33,23 @@ def empty_graph(rules):
 def calculate_contained_in(color, graph):
     parents = set(graph[color]["contained_in"].keys())
     if parents:
-        further_parents = list(chain(*[calculate_contained_in(color, graph) for color in parents]))
+        further_parents = list(
+            chain(*[calculate_contained_in(color, graph) for color in parents])
+        )
         if further_parents:
             parents.update(further_parents)
             return parents
 
     return parents
 
+
 def parse_rules(input):
     return [parse_line(line) for line in input]
 
+
 def build_graph(rules):
     return reduce(add_to_graph, rules, empty_graph(rules))
+
 
 def solve(input):
     rules = parse_rules(input)
