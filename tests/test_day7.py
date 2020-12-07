@@ -16,7 +16,7 @@ test_input_2 = [
     "shiny gold bags contain 2 dark red bags.",
     "dark red bags contain 2 dark orange bags.",
     "dark orange bags contain 2 dark yellow bags.",
-    "dark yellow bags contain 2 dark green bags.,",
+    "dark yellow bags contain 2 dark green bags.",
     "dark green bags contain 2 dark blue bags.",
     "dark blue bags contain 2 dark violet bags.",
     "dark violet bags contain no other bags.",
@@ -57,11 +57,18 @@ def test_make_graph():
     assert d.build_graph(small_rules) == small_graph
 
 
-def test_calculate_contained_in():
-    assert len(d.calculate_contained_in("velvet red", small_graph)) == 0
-    assert len(d.calculate_contained_in("faded blue", small_graph)) == 1
-    assert len(d.calculate_contained_in("dotted black", small_graph)) == 2
+def test_num_ancestors():
+    assert len(d.num_ancestors("velvet red", small_graph)) == 0
+    assert len(d.num_ancestors("faded blue", small_graph)) == 1
+    assert len(d.num_ancestors("dotted black", small_graph)) == 2
+
+
+def test_num_children():
+    assert d.num_children("velvet red", small_graph) == 16
+    assert d.num_children("faded blue", small_graph) == 2
+    assert d.num_children("dotted black", small_graph) == 0
 
 
 def test_solve():
-    assert d.solve(test_input_1) == (4, None)
+    assert d.solve(test_input_1) == (4, 32)
+    assert d.solve(test_input_2) == (0, 126)

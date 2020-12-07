@@ -30,17 +30,32 @@ def empty_graph(rules):
     return {rule[0]: {"contains": {}, "contained_in": {}} for rule in rules}
 
 
-def calculate_contained_in(color, graph):
+def num_ancestors(color, graph):
     parents = set(graph[color]["contained_in"].keys())
     if parents:
         further_parents = list(
-            chain(*[calculate_contained_in(color, graph) for color in parents])
+            chain(*[num_ancestors(color, graph) for color in parents])
         )
         if further_parents:
             parents.update(further_parents)
             return parents
 
     return parents
+
+
+def num_children(color, graph):
+    child_names = set(graph[color]["contains"].keys())
+    sum_children = sum(graph[color]["contains"].values())
+
+    if child_names:
+        return sum_children + sum(
+            [
+                num_children(name, graph) * graph[color]["contains"][name]
+                for name in child_names
+            ]
+        )
+
+    return sum_children
 
 
 def parse_rules(input):
@@ -54,4 +69,4 @@ def build_graph(rules):
 def solve(input):
     rules = parse_rules(input)
     graph = build_graph(rules)
-    return (len(calculate_contained_in("shiny gold", graph)), None)
+    return (len(num_ancestors("shiny gold", graph)), num_children("shiny gold", graph))
