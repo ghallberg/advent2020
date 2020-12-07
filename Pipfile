@@ -8,7 +8,10 @@ verify_ssl = true
 [packages]
 pytest = "*"
 mypy = "*"
-black = "*"
+black = "==18.9b0"
 
 [requires]
 python_version = "3.8"
+
+[pipenv]
+allow_prereleases = true
