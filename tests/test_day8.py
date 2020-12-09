@@ -14,4 +14,4 @@ small_input = [
 
 
 def test_solve():
-    assert d.solve(small_input) == (5, None)
+    assert d.solve(small_input) == (5, 8)

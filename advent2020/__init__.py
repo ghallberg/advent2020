@@ -6,5 +6,6 @@ from .day5 import solve as solve_day5
 from .day6 import solve as solve_day6
 from .day7 import solve as solve_day7
 from .day8 import solve as solve_day8
+from .day9 import solve as solve_day9
 
-MAX_DAY = 8
+MAX_DAY = 9

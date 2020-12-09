@@ -54,4 +54,4 @@ def solve(input):
         if last_ins >= len(program):
             break
 
-    return (run_until_loop_or_end(program), acc)
+    return (run_until_loop_or_end(program)[0], acc)
