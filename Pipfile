@@ -4,14 +4,16 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-
-[packages]
 pytest = "*"
 mypy = "*"
 black = "==18.9b0"
+pip = "*"
+advent2020 = {editable = true, path = "."}
+
+[packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"
 
 [pipenv]
 allow_prereleases = true

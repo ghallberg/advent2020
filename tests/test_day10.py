@@ -38,5 +38,5 @@ tinput_l = [
 
 
 def test_solve():
-    assert d.solve(tinput_s) == (35, None)
-    assert d.solve(tinput_l) == (220, None)
+    assert d.solve(tinput_s) == (35, 8)
+    assert d.solve(tinput_l) == (220, 19208)
