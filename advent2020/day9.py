@@ -8,7 +8,7 @@ def is_valid(code, index, preamble_size):
 
 
 def first_invalid(code, preamble_size):
-    for i in range(preamble_size, len(code)-1):
+    for i in range(preamble_size, len(code) - 1):
         if not is_valid(code, i, preamble_size):
             return code[i]
 
@@ -16,7 +16,7 @@ def first_invalid(code, preamble_size):
 def find_weakness(code, target):
     for i in range(len(code)):
         run = [code[i]]
-        for j in code[i+1:]:
+        for j in code[i + 1 :]:
             run.append(j)
             if sum(run) == target:
                 return min(run) + max(run)
@@ -24,13 +24,8 @@ def find_weakness(code, target):
                 break
 
 
-
-
-
-
 def solve(input):
     int_code = [int(x) for x in input]
     a1 = first_invalid(int_code, 25)
     a2 = find_weakness(int_code, a1)
-    return(a1, a2)
-
+    return (a1, a2)

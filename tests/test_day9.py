@@ -25,6 +25,7 @@ test_code = [
 
 int_test_code = [int(x) for x in test_code]
 
+
 def test_is_valid():
     assert d.is_valid(int_test_code, 5, 5)
     assert not d.is_valid(int_test_code, 14, 5)
