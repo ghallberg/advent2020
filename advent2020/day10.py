@@ -52,8 +52,6 @@ def solve(input):
 
     runs = reduce(run_reducer, steps, [0])
 
-    print(runs)
-
     answer_guess = reduce(variation_reducer, runs, 1)
 
 
